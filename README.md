@@ -64,12 +64,12 @@ Essa solução tem como objetivo identificar **ações críticas** dentro da sua
 
  Análise comportamental e alertas inteligentes
 
-##🙋‍♂️ Autor
+## 🙋‍♂️ Autor
 Desenvolvido por Kaike Almeida
 🎯 Focado em Cloud Security, DevSecOps e arquitetura AWS.
 
-##📄 Licença
+## 📄 Licença
 MIT License. Use, adapte e contribua.
 
-##🤝 Contribuições
+## 🤝 Contribuições
 Pull requests são bem-vindos. Se quiser dar feedback ou colaborar com ideias, fique à vontade para abrir uma issue.
