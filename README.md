@@ -1,63 +1,78 @@
 # 🛡️ Monitoramento de Segurança em Tempo Real na AWS (100% Serverless)
 
-Este projeto implementa uma arquitetura serverless para detecção e alerta de eventos críticos em ambientes AWS.  
-Utiliza os serviços **CloudTrail**, **S3**, **Lambda** e **SNS**, com roteamento inteligente de notificações baseado em severidade.
+Arquitetura serverless para monitoramento contínuo de eventos críticos em ambientes AWS, utilizando **CloudTrail + S3 + Lambda + SNS**.
+
+> Projetado com foco em boas práticas de segurança, automação e escalabilidade.  
+> Futuramente implementado via **Terraform** com deploy completo e modularizado.
 
 ---
 
-## 📌 Objetivo
+## 🧠 Visão Geral
 
-Criar um sistema de **monitoramento automatizado** que:
-
-- Detecta atividades sensíveis (ex: criação de usuários IAM, alteração de políticas, acessos a buckets);
-- Processa eventos em tempo real;
-- Envia alertas para canais adequados (e-mail, Slack, SIEM, SOAR, etc);
-- Seja **escalável, serverless e seguro** por padrão.
-
----
-
-## ⚙️ Arquitetura da Solução
-![Cópia do Projeto security](https://github.com/user-attachments/assets/6e89a604-0fe6-4b9d-a653-211b9caba296)
-
+Essa solução tem como objetivo identificar **ações críticas** dentro da sua conta AWS e emitir **alertas em tempo real**, categorizados por severidade.
 
 
 ---
 
-## 🔁 Fluxo de Eventos
+## 🏗️ Arquitetura
 
-1. **Usuário realiza uma ação na AWS**
-2. **CloudTrail** registra o evento
-3. Evento é armazenado em um **bucket S3**
-4. Um **trigger Lambda** é ativado a cada novo log
-5. A **Lambda** processa o log e identifica eventos relevantes
-6. A Lambda publica alertas no **SNS**
-7. O **SNS** envia notificações para diferentes canais, conforme a severidade:
+![Cópia do Projeto security](https://github.com/user-attachments/assets/7b0ea8d7-f599-4cde-88f8-bfbdd31823b3)
 
-| Severidade | Destino                          |
-|------------|----------------------------------|
-| Alta       | Webhook (Slack, SOAR, PagerDuty) |
-| Média      | E-mail da equipe de segurança    |
-| Informativa| SIEM / CloudWatch Logs / S3      |
+### 🔁 Fluxo:
+
+1. Usuário ou sistema realiza uma ação sensível na AWS  
+2. O CloudTrail registra a chamada de API  
+3. Logs são armazenados automaticamente em um bucket S3  
+4. Novo log aciona uma função Lambda  
+5. A Lambda processa e analisa o evento  
+6. Um alerta é enviado via Amazon SNS conforme a severidade  
+7. A equipe de segurança é notificada por e-mail, webhook ou outra integração
 
 ---
 
-## 🧰 Serviços Utilizados
+## 🧩 Componentes Usados
 
-- **AWS CloudTrail** – Captura todas as ações na conta
-- **Amazon S3** – Armazena os logs de eventos
-- **AWS Lambda** – Processa os logs e identifica ações críticas
-- **Amazon SNS** – Gerencia e distribui alertas por severidade
-- *(Opcional)*: Integrações com Slack, Discord, SIEMs ou sistemas SOAR
+| Serviço AWS      | Função                                                    |
+|------------------|------------------------------------------------------------|
+| **CloudTrail**   | Captura eventos da conta (criação de IAM, S3 access, etc)  |
+| **S3 Bucket**    | Armazena os logs gerados pelo CloudTrail                   |
+| **Lambda**       | Processa logs, filtra eventos relevantes e define severidade |
+| **SNS Topic**    | Roteia notificações para canais conforme a criticidade     |
 
 ---
 
-## 🔐 Boas Práticas Implementadas
+## 🎯 Severidade e Ações
 
-- Princípio de **Menor Privilégio** (IAM Role da Lambda com permissões mínimas)
-- Segregação por **nível de severidade**
-- Escalabilidade horizontal via Lambda + SNS
-- Armazenamento seguro dos logs
-- Notificações multicanal
-- Design serverless (sem gerenciamento de servidores)
+| Severidade | Cor  | Ação                                                         |
+|------------|------|--------------------------------------------------------------|
+| Alta       | 🔴   | Envio para webhook (Slack/Discord/SOAR/automatização)        |
+| Média      | 🟠   | E-mail para equipe de segurança                               |
+| Informativa| 🔵   | Armazenamento e análise posterior via SIEM / Athena          |
 
---- 
+---
+
+🛠️ Próximas Evoluções
+ Deploy completo via Terraform
+
+ Lógica de resposta automática via Step Functions
+
+ Integração com AWS Security Hub
+
+ Dashboards com Athena + QuickSight
+
+ Suporte a múltiplas contas com AWS Organizations
+
+ Análise comportamental e alertas inteligentes
+
+🙋‍♂️ Autor
+Desenvolvido por Kaike Almeida
+🎯 Focado em Cloud Security, DevSecOps e arquitetura AWS.
+
+📄 Licença
+MIT License. Use, adapte e contribua.
+
+🤝 Contribuições
+Pull requests são bem-vindos. Se quiser dar feedback ou colaborar com ideias, fique à vontade para abrir uma issue.
+## 📦 Estrutura do Projeto (Futuro)
+
+`
