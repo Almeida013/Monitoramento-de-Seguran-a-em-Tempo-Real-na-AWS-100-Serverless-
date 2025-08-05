@@ -51,19 +51,6 @@ Essa solução tem como objetivo identificar **ações críticas** dentro da sua
 
 ---
 
-##🛠️ Próximas Evoluções
- Deploy completo via Terraform
-
- Lógica de resposta automática via Step Functions
-
- Integração com AWS Security Hub
-
- Dashboards com Athena + QuickSight
-
- Suporte a múltiplas contas com AWS Organizations
-
- Análise comportamental e alertas inteligentes
-
 ## 🙋‍♂️ Autor
 Desenvolvido por Kaike Almeida
 🎯 Focado em Cloud Security, DevSecOps e arquitetura AWS.
