@@ -53,7 +53,7 @@ Essa solução tem como objetivo identificar **ações críticas** dentro da sua
 
 ## 🙋‍♂️ Autor
 Desenvolvido por Kaike Almeida
-🎯 Focado em Cloud Security, DevSecOps e arquitetura AWS.
+🎯 Cloud Security, DevSecOps e arquitetura AWS.
 
 ## 📄 Licença
 MIT License. Use, adapte e contribua.
