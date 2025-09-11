@@ -32,8 +32,6 @@ Fluxo do sistema:
 
 EC2 Metrics → CloudWatch Alarms → SNS → Email
 
-yaml
-Copiar código
 
 ### Por que funciona?
 ✅ CloudWatch tem permissão **nativa** para disparar SNS  
