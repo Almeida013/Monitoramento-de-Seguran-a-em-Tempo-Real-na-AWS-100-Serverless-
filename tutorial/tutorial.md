@@ -38,7 +38,7 @@ Você precisa ter acesso a:
 **⚠️ ATENÇÃO:** Para billing alerts funcionarem, você **PRECISA** estar em:
 - **Região:** `US East (N. Virginia) us-east-1`
 
-🤔 **Por quê?** Billing metric data is stored in this Region and represents worldwide charges - documentação oficial da AWS.
+🤔 **Por quê?** Os dados da métrica de cobrança são armazenados nesta Região e representam cobranças em todo o mundo. - documentação oficial da AWS.
 
 **Como trocar a região:**
 1. No canto superior direito do console AWS
@@ -551,4 +551,5 @@ Quando terminar os testes:
 A diferença entre uma empresa que detecta ataques em **minutos** vs **meses** pode ser a sobrevivência do negócio.
 
 **Compartilhe** essa experiência, coloque no LinkedIn, mostre pro seu chefe. Você acabou de provar que entende tanto a parte técnica quanto o impacto de negócio da segurança.
+
 
