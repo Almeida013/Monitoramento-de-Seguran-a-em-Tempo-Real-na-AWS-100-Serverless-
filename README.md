@@ -31,6 +31,8 @@ Casos de uso principais:
 Fluxo do sistema:
 
 EC2 Metrics → CloudWatch Alarms → SNS → Email
+<img width="1266" height="260" alt="image" src="https://github.com/user-attachments/assets/cd9fec99-5bb6-4386-93c2-577851923532" />
+
 
 
 ### Por que funciona?
@@ -38,8 +40,6 @@ EC2 Metrics → CloudWatch Alarms → SNS → Email
 ✅ Nenhuma dependência de `iam:PassRole`  
 ✅ Métricas de EC2 são coletadas **automaticamente**  
 ✅ Foco em **casos reais de segurança**  
-
-📌 A arquitetura completa em **diagramas** e **prints de execução real** está em [`/docs`](./docs).
 
 ---
 
@@ -62,7 +62,7 @@ Para acompanhamento contínuo, foi criado um **Dashboard customizado no CloudWat
 - Status dos alarms (OK / In Alarm)  
 - Indicadores visuais de incidentes  
 
-Veja screenshots em [`/docs/screenshots`](./docs/screenshots).
+Veja screenshots em [`/screenshots`]
 
 ---
 
@@ -75,17 +75,6 @@ O projeto foi **validado em laboratório** com simulações reais:
 - 💸 **Billing** → ultrapassando limite definido  
 
 📬 Todos os cenários resultaram em **alertas por email em tempo real**.
-
----
-
-## 📂 Estrutura do Repositório
-security-monitoring-aws/
-├── cloudwatch/ # Alarms e dashboards
-├── docs/ # Arquitetura e screenshots
-├── scripts/ # Scripts de teste e automação
-├── infra/ # Futuro: Terraform/IaC
-├── LICENSE
-└── README.md
 
 ---
 
@@ -141,9 +130,3 @@ MIT License — use, adapte e contribua livremente.
 Pull requests e ideias são muito bem-vindas.  
 Abra uma issue, vamos construir juntos.  
 
----
-
-## 🔗 Links Rápidos
-- 📚 [Arquitetura & Prints](./docs)  
-- 📜 [Alarms JSON](./cloudwatch/alarms)  
-- ⚙️ [Scripts de Teste](./scripts)  
