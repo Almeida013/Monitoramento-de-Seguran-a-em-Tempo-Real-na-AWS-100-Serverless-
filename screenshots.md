@@ -1,5 +1,6 @@
 # Documentação do Projeto - Sistema de Monitoramento de Segurança AWS
-⚠️ Ambiente: Sistema desenvolvido e testado em AWS Sandbox (recursos temporários)
+> ⚠️ **Ambiente**: Sistema desenvolvido e testado em AWS Sandbox (recursos temporários)
+
 
 --
 
@@ -40,3 +41,4 @@
 
 *Descrição:* Dashboard principal do sistema de monitoramento exibindo métricas críticas de CPU e tráfego de rede em tempo real. Esta interface mostra o painel de controle centralizado onde são visualizados os indicadores de performance do sistema, incluindo utilização de CPU chegando a 100% e picos de tráfego de rede de saída.
 *Parte do Projeto:* Interface de monitoramento frontend - módulo de visualização de métricas em tempo real.
+
