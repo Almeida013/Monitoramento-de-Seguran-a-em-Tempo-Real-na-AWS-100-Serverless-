@@ -1,4 +1,4 @@
-# 🛡️ Projeto AWS | Detecção e Alertas em Tempo Real
+# 🛡️ Projeto AWS | Detecção e Alertas
 
  ![AWS EC2](https://img.shields.io/badge/AWS-EC2-orange?logo=amazon-aws&logoColor=white)
 ![CloudWatch](https://img.shields.io/badge/AWS-CloudWatch-FF4F8B?logo=amazon-aws&logoColor=white)
