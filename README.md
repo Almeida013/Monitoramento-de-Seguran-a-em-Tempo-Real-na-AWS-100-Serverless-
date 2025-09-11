@@ -62,8 +62,8 @@ Para acompanhamento contínuo, foi criado um **Dashboard customizado no CloudWat
 - Status dos alarms (OK / In Alarm)  
 - Indicadores visuais de incidentes  
 
-Veja screenshots em [`/screenshots`]
 
+ Veja as capturas de tela do projeto em [`/screenshots`](https://github.com/Almeida013/Projeto-AWS-Det
 ---
 
 ## 🧪 Testes e Demonstração
