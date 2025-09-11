@@ -1,62 +1,151 @@
-# 🛡️ Monitoramento de Segurança em Tempo Real na AWS (100% Serverless)
+# 🛡️ Projeto AWS | Detecção e Alertas em Tempo Real
 
-Arquitetura serverless para monitoramento contínuo de eventos críticos em ambientes AWS, utilizando **CloudTrail + S3 + Lambda + SNS**.
+ ![AWS EC2](https://img.shields.io/badge/AWS-EC2-orange?logo=amazon-aws&logoColor=white)
+![CloudWatch](https://img.shields.io/badge/AWS-CloudWatch-FF4F8B?logo=amazon-aws&logoColor=white)
+![SNS](https://img.shields.io/badge/AWS-SNS-FF9900?logo=amazon-aws&logoColor=white)
+![Email Alerts](https://img.shields.io/badge/Email-Alerts-blue?logo=gmail&logoColor=white)
+![Amazon Linux](https://img.shields.io/badge/Amazon-Linux%202023-232F3E?logo=linux&logoColor=white)
+![Terraform](https://img.shields.io/badge/IaC-Terraform-844FBA?logo=terraform&logoColor=white)
 
-> Projetado com foco em boas práticas de segurança, automação e escalabilidade.  
-> Futuramente implementado via **Terraform** com deploy completo e modularizado.
+
+> E se alguém começasse a minerar criptomoeda escondido na sua instância EC2 agora?  
+> Você só descobriria quando a conta da AWS chegasse no fim do mês?
+
+Foi com essa provocação que nasceu este projeto.  
+Muitas empresas **descobrem tarde demais** abusos como cryptomining, exfiltração de dados ou até custos descontrolados.  
+O objetivo aqui foi criar uma **arquitetura 100% serverless e funcional** que monitora atividades suspeitas na AWS **em tempo real** e dispara alertas críticos antes que o prejuízo aconteça.
 
 ---
 
-## 🧠 Visão Geral
-
-Essa solução tem como objetivo identificar **ações críticas** dentro da sua conta AWS e emitir **alertas em tempo real**, categorizados por severidade.
-
+## 🎯 Objetivo
+Detectar automaticamente comportamentos suspeitos em **instâncias EC2** e outros recursos da AWS, disparando **alertas críticos via email (SNS)** em tempo real.  
+Casos de uso principais:
+- 🚩 **Cryptomining** → uso excessivo de CPU  
+- 🚩 **Data Exfiltration** → tráfego de saída anormal  
+- 🚩 **Comprometimento de instância** → falhas no status check  
+- 🚩 **Custo inesperado** → alertas de billing
 
 ---
 
 ## 🏗️ Arquitetura
+Fluxo do sistema:
 
-![Cópia do Projeto security](https://github.com/user-attachments/assets/7b0ea8d7-f599-4cde-88f8-bfbdd31823b3)
+EC2 Metrics → CloudWatch Alarms → SNS → Email
 
-### 🔁 Fluxo:
+yaml
+Copiar código
 
-1. Usuário ou sistema realiza uma ação sensível na AWS  
-2. O CloudTrail registra a chamada de API  
-3. Logs são armazenados automaticamente em um bucket S3  
-4. Novo log aciona uma função Lambda  
-5. A Lambda processa e analisa o evento  
-6. Um alerta é enviado via Amazon SNS conforme a severidade  
-7. A equipe de segurança é notificada por e-mail, webhook ou outra integração
+### Por que funciona?
+✅ CloudWatch tem permissão **nativa** para disparar SNS  
+✅ Nenhuma dependência de `iam:PassRole`  
+✅ Métricas de EC2 são coletadas **automaticamente**  
+✅ Foco em **casos reais de segurança**  
 
----
-
-## 🧩 Componentes Usados
-
-| Serviço AWS      | Função                                                    |
-|------------------|------------------------------------------------------------|
-| **CloudTrail**   | Captura eventos da conta (criação de IAM, S3 access, etc)  |
-| **S3 Bucket**    | Armazena os logs gerados pelo CloudTrail                   |
-| **Lambda**       | Processa logs, filtra eventos relevantes e define severidade |
-| **SNS Topic**    | Roteia notificações para canais conforme a criticidade     |
+📌 A arquitetura completa em **diagramas** e **prints de execução real** está em [`/docs`](./docs).
 
 ---
 
-## 🎯 Severidade e Ações
+## ⚙️ Implementação
+Cada alarme cobre um cenário crítico:
 
-| Severidade | Cor  | Ação                                                         |
-|------------|------|--------------------------------------------------------------|
-| Alta       | 🔴   | Envio para webhook (Slack/Discord/SOAR/automatização)        |
-| Média      | 🟠   | E-mail para equipe de segurança                               |
-| Informativa| 🔵   | Armazenamento e análise posterior via SIEM / Athena          |
+1. **High CPU Utilization** → Detecta possível cryptomining  
+2. **Network Out Alta** → Detecta exfiltração de dados  
+3. **Status Check Failed** → Indica comprometimento da instância  
+4. **Billing Alert** → Protege contra uso indevido/custos inesperados  
+
+👉 Todos configurados no **CloudWatch Alarms** e integrados com **SNS** para envio de email.
+
+---
+
+## 📊 Dashboard
+Para acompanhamento contínuo, foi criado um **Dashboard customizado no CloudWatch**, exibindo:
+- Uso de CPU em tempo real  
+- Tráfego de rede (Network Out)  
+- Status dos alarms (OK / In Alarm)  
+- Indicadores visuais de incidentes  
+
+Veja screenshots em [`/docs/screenshots`](./docs/screenshots).
+
+---
+
+## 🧪 Testes e Demonstração
+O projeto foi **validado em laboratório** com simulações reais:
+
+- 💻 **Cryptomining** → usando `stress --cpu` na instância  
+- 🌐 **Data Exfiltration** → enviando 1GB em 5 minutos  
+- ⚠️ **Falha de instância** → forçando `StatusCheckFailed`  
+- 💸 **Billing** → ultrapassando limite definido  
+
+📬 Todos os cenários resultaram em **alertas por email em tempo real**.
+
+---
+
+## 📂 Estrutura do Repositório
+security-monitoring-aws/
+├── cloudwatch/ # Alarms e dashboards
+├── docs/ # Arquitetura e screenshots
+├── scripts/ # Scripts de teste e automação
+├── infra/ # Futuro: Terraform/IaC
+├── LICENSE
+└── README.md
+
+---
+
+## 🚀 Roadmap
+- [ ] Automação da arquitetura com **Terraform**    
+- [ ] Export de logs para **SIEM (Athena / Security Hub)**   
+
+---
+
+## ⚠️ Limitações do Lab vs Produção
+
+Este projeto foi desenvolvido para **aprendizado e demonstração prática** de monitoramento de métricas na AWS.  
+Apesar de funcionar de verdade, **não deve ser usado em produção sem ajustes**. Eis os principais pontos:
+
+1. **Ação Automática (Stop Instance)**  
+   - Bom para demo, mas em produção pode derrubar sistemas críticos.  
+   - Correto: isolar/quarentenar instância ou aplicar política automatizada via SOAR.  
+
+2. **Alertas apenas por Email (SNS)**  
+   - Email pode ser lento ou ignorado.  
+   - Correto: integrar com Slack/Teams, PagerDuty ou SIEM.  
+
+3. **Thresholds fixos nos alarmes**  
+   - Pode gerar falsos positivos/negativos.  
+   - Correto: usar Anomaly Detection ou métricas adaptativas.  
+
+4. **Exposição de portas no Security Group**  
+   - Necessário para teste, mas inseguro em produção.  
+   - Correto: restringir IPs ou usar ALB + WAF.  
+
+5. **Logs não centralizados**  
+   - Hoje ficam apenas no CloudWatch.  
+   - Correto: armazenar em S3 e integrar com SIEM/GuardDuty/Security Hub.  
+
+👉 **Resumo:** este projeto é um **lab didático**, ótimo para aprendizado, mas deve ser adaptado para uso corporativo.
 
 ---
 
 ## 🙋‍♂️ Autor
-Desenvolvido por Kaike Almeida
-🎯 Cloud Security, DevSecOps e arquitetura AWS.
+Desenvolvido por **Kaike Almeida**  
+🎯 Cloud Security | DevSecOps | Arquitetura AWS
+
+👉 Conecte-se comigo no [LinkedIn]([https://www.linkedin.com/](https://www.linkedin.com/in/kaikealmeida))  
+
+---
 
 ## 📄 Licença
-MIT License. Use, adapte e contribua.
+MIT License — use, adapte e contribua livremente.  
+
+---
 
 ## 🤝 Contribuições
-Pull requests são bem-vindos. Se quiser dar feedback ou colaborar com ideias, fique à vontade para abrir uma issue.
+Pull requests e ideias são muito bem-vindas.  
+Abra uma issue, vamos construir juntos.  
+
+---
+
+## 🔗 Links Rápidos
+- 📚 [Arquitetura & Prints](./docs)  
+- 📜 [Alarms JSON](./cloudwatch/alarms)  
+- ⚙️ [Scripts de Teste](./scripts)  
