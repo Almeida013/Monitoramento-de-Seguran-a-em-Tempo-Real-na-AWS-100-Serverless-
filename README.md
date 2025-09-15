@@ -63,7 +63,7 @@ Para acompanhamento contínuo, foi criado um **Dashboard customizado no CloudWat
 - Indicadores visuais de incidentes  
 
 
- Veja as capturas de tela do projeto em [`/screenshots`](https://github.com/Almeida013/Projeto-AWS-Det
+ Veja as capturas de tela do projeto em [`/screenshots`](https://github.com/Almeida013/Projeto-AWS-Deteccao-e-Alertas/blob/main/screenshots.md)
 ---
 
 ## 🧪 Testes e Demonstração
